@@ -1,0 +1,49 @@
+.App {
+  text-align: center;
+  background-color: blueviolet;
+  text-align: center;
+  display: flex;
+  flex: 0 1;
+  flex-direction: column;
+  height: 100svh;
+  box-sizing: border-box;
+}
+
+.page {
+  display: flex;
+  flex: 1 1 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  justify-content: center;
+  max-width: 100%;
+  background-color: rgb(148, 121, 173);
+}
+
+.contentBlock {
+  box-sizing: border-box;
+  overflow: hidden;
+  max-height: 100%;
+  min-width: 80%;
+  max-width: 100%;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 5px 15px rgb(77, 65, 92);
+}
+
+.button {
+  box-shadow: none;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 1.3em;
+  background: #4d415c;
+  border: none;
+  border-radius: 5px 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.imgBlock {
+  margin-top: 20px;
+}
