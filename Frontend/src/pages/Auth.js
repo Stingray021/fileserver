@@ -53,8 +53,10 @@ const Auth = observer(() => {
       user.setIsAuth(true);
       navigate(MAIN_ROUTE);
     } catch (e) {
-      console.error(e.message);
-      setError(e.message);
+      console.error(e);
+      if (e.request.status === 500)
+        setError("Неверный логин или пароль");
+      else setError(e.message);
     }
   };
   return (

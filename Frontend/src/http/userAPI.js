@@ -26,9 +26,7 @@ export const changePassword = async (username, password, newPassword) => {
 export const check = async () => {
   try {
     const result = await $host.get("api/user/check-auth");
-    if (result.status === 200)
-      return result.data;
-    else throw new Error("SAdsads")
+    return result.data;
   } catch (err) {
     return err.response.data;
   }
