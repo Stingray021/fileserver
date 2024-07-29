@@ -3,7 +3,6 @@ const fs = require("fs");
 const folderPath = "./static";
 
 //Функция получения массива с именем файлов
-
 const getFiles = async () => {
   let files = await fs.promises.readdir(folderPath);
   console.log(files)

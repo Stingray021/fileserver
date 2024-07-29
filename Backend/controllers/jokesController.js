@@ -3,6 +3,8 @@ const fs = require("fs");
 
 class JokesController {
   async getRandomJokes(req, res) {
+    // if (!req.user)
+    //   return res.json({error: "Требуется авторизация"});
     let jokes = [];
     const regJokesText =
       /<\s*div[^>]*?class="text"[^>]*?>([\S\s]*?)<\/\s*div\s*>/gm;

@@ -1,14 +1,12 @@
 import React, {useState} from "react";
+import { getCat } from "../http/catAPI";
 
 const Cat = () => {
   const [imgURL, setImgURL] = useState("");
 
   const getImage = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/cat");
-      const data = await response.json();
-      setImgURL(data.url);
-      console.log(data.url);
+      getCat().then(data => setImgURL(data.url))
     } catch (e) {
       console.log(e);
     }
