@@ -2,7 +2,6 @@ const { response } = require("express");
 const { getFiles, getFileData } = require("../function/files");
 const fs = require("fs");
 const mime = require("mime-types");
-const { error } = require("console");
 
 class UserController {
   async getFile(req, res) {

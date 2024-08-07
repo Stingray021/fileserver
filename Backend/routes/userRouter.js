@@ -16,6 +16,13 @@ router.post(
   }
 );
 
+router.post("/logout", function(req, res, next){
+  req.logout(function(err) {
+    if (err) { return res.json({err}); }
+  });
+  return res.json({logout: true})
+})
+
 router.post("/password-change", userController.changePassword);
 
 router.get("/check-auth", userController.getAuthStatus);

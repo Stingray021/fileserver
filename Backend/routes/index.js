@@ -3,7 +3,6 @@ const router = new Router()
 const fileRouter = require('./fileRouter')
 const JokesRouter = require('./jokesRouter')
 const catRouter = require("./catRouter")
-const passport = require('passport')
 const userRouter = require('./userRouter')
 
 router.use('/file', fileRouter)

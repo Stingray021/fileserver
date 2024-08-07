@@ -1,10 +1,5 @@
 const client = require("../db");
 const bcrypt = require("bcrypt");
-const passport = require("passport");
-
-async function find() {
-  const a = 2;
-}
 
 class UserController {
   async findOneById(id) {
@@ -22,7 +17,6 @@ class UserController {
 
   async findOneByUsername(username) {
     try {
-      console.log("SSASDASD");
       const text = "SELECT * FROM users WHERE login = $1";
       const user = await client.query(text, [username]);
 
@@ -35,15 +29,16 @@ class UserController {
     }
   }
 
-  registration = async (req, res) => {
+  registration = async (req, res, next) => {
     try {
       const { username, password, name } = req.body;
 
       const user = await this.findOneByUsername(username);
-      console.log(user);
       if (user) {
         throw new Error("Пользователь с таким именем уже существует");
       }
+      if (password.length > 20 || password.length < 5)
+        throw new Error("Пароль не соответствует требованяим");
       const textQuery2 =
         "INSERT INTO users(login, password, name) VALUES($1, $2, $3) RETURNING *";
       const hashPassword = await bcrypt.hash(password, 6);
@@ -55,8 +50,9 @@ class UserController {
       if (!result.rows[0]) {
         throw new Error("Ошибка при создании аккаунта");
       }
-      return res.json({ id: result.rows[0].id });
+      next()
     } catch (e) {
+      console.error(e)
       return res.json({ error: e.message });
     }
   };
@@ -64,10 +60,7 @@ class UserController {
   changePassword = async (req, res) => {
     try {
       const { username, password, newPassword } = req.body;
-      console.log(username);
       const user = await this.findOneByUsername(username);
-      // console.log(result.rows[0].password)
-      console.log(user);
       if (!user) {
         throw new Error("Пользователь с таким именем не существует");
       }
@@ -108,7 +101,6 @@ class UserController {
   async check(username, password) {
     try {
       const user = await this.findOneByUsername(username);
-      console.log(user);
       if (!bcrypt.compareSync(password, user.password)) {
         throw new Error("Пароли не совпадают");
       }

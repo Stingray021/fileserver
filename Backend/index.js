@@ -9,7 +9,6 @@ const client = require("./db");
 const passport = require("passport");
 require("./strategies/local-strategy.js")
 
-// app.set('trust proxy', 1) // trust first proxy
 const corsOptions = {
   exposedHeaders: ['Set-Cookie'],
   credentials: true, 
@@ -17,21 +16,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-//   res.setHeader("Access-Control-Allow-Credentials", "true")
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, Set-Cookie, Access-Control-Allow-Credentials, Access-Control-Allow-Origin"
-//   );
-//   next();
-// });
+
 app.use(express.json());
 app.use(session({
   secret: 'FD;X>~qkd5}K!yyJ)k@4Q4–c290I=–l;',
   resave: false,
-  // saveUninitialized: true,
-  // cookie: { secure: true }
+  // cookie: {httpOnly: false}
 }))
 app.use(passport.initialize());
 app.use(passport.session());
@@ -44,6 +34,5 @@ const start = async () => {
   } catch (e) {
     console.log(e);
   }
-  //await client.end();
 };
 start();

@@ -40,11 +40,14 @@ const Auth = observer(() => {
     try {
       let data;
       if (isLogin) {
-        if (!password || !username) throw new Error("Не все поля заполнены");
+        if (!password || !username) 
+          throw new Error("Не все поля заполнены");
         data = await login(username, password);
       } else {
         if (!password || !username || !name)
           throw new Error("Не все поля заполнены");
+        if (password.length > 20 || password.length < 5)
+          throw new Error("Размер пароля должен быть больше 4 и меньше 21 символа");
         if (password !== passwordCheck) throw new Error("Пароли не совпадают");
         data = await registration(username, password, name);
       }
@@ -53,17 +56,12 @@ const Auth = observer(() => {
       user.setIsAuth(true);
       navigate(MAIN_ROUTE);
     } catch (e) {
-      console.error(e);
-      if (e.request.status === 500)
-        setError("Неверный логин или пароль");
+      if (e.request?.status === 500) setError("Неверный логин или пароль");
       else setError(e.message);
     }
   };
   return (
-    <div
-      className={"page center"}
-      // style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100%"}}
-    >
+    <div className={"page center"}>
       {isChangePassword ? (
         <ChangePassPanel
           setUsername={setUsername}

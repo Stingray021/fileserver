@@ -11,6 +11,7 @@ function App() {
   const { user } = useContext(Context);
   useEffect(() => {
     try {
+      console.log(document.cookie)
       check()
       .then((data) => {
         if (data.userId) {

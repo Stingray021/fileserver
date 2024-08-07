@@ -12,6 +12,7 @@ import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.scss";
+import { logout } from "../../http/userAPI";
 // import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 
 const NavBar = observer(() => {
@@ -24,6 +25,7 @@ const NavBar = observer(() => {
   };
   const isCurrentLocation = (compLoc) => compLoc === location.pathname;
   const logOut = () => {
+    logout()
     user.setUser({});
     user.setIsAuth(false);
     navigate(NON_AUTH);
@@ -58,7 +60,7 @@ const NavBar = observer(() => {
               }
               onClick={() => navigate(MAIN_ROUTE)}
             >
-              Main
+              Главная
             </div>
             <div
               className={
@@ -81,7 +83,7 @@ const NavBar = observer(() => {
               Jokes
             </div>
             {/*<div onClick={() => navigate(ADMIN_ROUTE)}>Admin</div>*/}
-            <div onClick={() => logOut()}>Logout</div>
+            <div onClick={() => logOut()}>Выход</div>
           </div>
         ) : (
           <div
@@ -102,7 +104,7 @@ const NavBar = observer(() => {
               }
               onClick={() => navigate(LOGIN_ROUTE)}
             >
-              Sing in
+              Вход
             </div>
             <div
               className={
@@ -112,7 +114,7 @@ const NavBar = observer(() => {
               }
               onClick={() => navigate(REGISTRATION_ROUTE)}
             >
-              Sing up
+              Регистрация
             </div>
           </div>
         )}

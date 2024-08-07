@@ -31,3 +31,10 @@ export const check = async () => {
     return err.response.data;
   }
 };
+export const logout = async () => {
+  try {
+    await $authHost.post('/api/user/logout')
+  } catch (error) {
+    console.log(error)
+  }
+}
